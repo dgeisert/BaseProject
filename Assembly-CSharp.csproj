@@ -66,6 +66,10 @@
      <Compile Include="Assets\Scripts\Game.cs" />
      <Compile Include="Assets\Scripts\Movement\BoatControls.cs" />
      <Compile Include="Assets\Scripts\Movement\SimpleIsoMovement.cs" />
+     <Compile Include="Assets\Scripts\Randomizers\RandomAudio.cs" />
+     <Compile Include="Assets\Scripts\Randomizers\RandomPosition.cs" />
+     <Compile Include="Assets\Scripts\Randomizers\RandomRotation.cs" />
+     <Compile Include="Assets\Scripts\Randomizers\RandomScale.cs" />
      <Compile Include="Assets\Scripts\Reward.cs" />
      <Compile Include="Assets\Scripts\UI\Dialog.cs" />
      <Compile Include="Assets\Scripts\UI\DialogResult.cs" />

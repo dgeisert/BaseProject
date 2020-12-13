@@ -14,6 +14,14 @@ public static class Extensions
         canvasGroup.alpha = enabled ? 1 : 0;
         canvasGroup.interactable = enabled;
     }
+    public static T Random1<T>(this List<T> list)
+    {
+        return list[Mathf.FloorToInt(Random.value * list.Count)];
+    }
+    public static T Random1<T>(this T[] array)
+    {
+        return array[Mathf.FloorToInt(Random.value * array.Length)];
+    }
 }
 
 public class Util : MonoBehaviour
@@ -35,7 +43,7 @@ public class Util : MonoBehaviour
             shake = magnitude * 0.1f * new Vector3((Random.value - 0.5f), (Random.value - 0.5f), (Random.value - 0.5f));
             t.position += shake;
             yield return null;
-            if(t == null)
+            if (t == null)
             {
                 yield break;
             }
