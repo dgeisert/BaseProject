@@ -35,10 +35,10 @@ public class Flytext : MonoBehaviour
     {
         transform.LookAt(transform.position - Camera.main.transform.position);
         transform.position += Vector3.up * 0.01f * upValue * time / duration / duration;
-        time -= 0.015f;
+        time -= Time.deltaTime;
         if (time < 0.5f)
         {
-            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.03f);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime * 2);
         }
     }
 }

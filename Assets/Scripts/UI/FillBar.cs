@@ -5,6 +5,10 @@ using UnityEngine;
 public class FillBar : MonoBehaviour
 {
     [SerializeField] Transform bg, fill, preFill;
+    public float fullValue = 100, currentValue = 100;
+    public bool flytext = false;
+    public Color flytextUp, flytextDown;
+    public float flytextSize;
     public float Percent
     {
         get
@@ -58,7 +62,7 @@ public class FillBar : MonoBehaviour
                 preFill.transform.localScale.z);
         }
     }
-    private float percent, changeTime, fillValue, preFillValue, rate = 0.01f, pause = 0.2f;
+    private float percent = 1, changeTime, fillValue, preFillValue, rate = 0.01f, pause = 0.2f;
 
     private void Update()
     {
@@ -87,5 +91,23 @@ public class FillBar : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void UpdateValue(float change)
+    {
+        if (flytext)
+        {
+            if (change < 0)
+            {
+                Flytext.CreateFlytext(transform.position + Vector3.up * 0.2f, change.ToString("#"), flytextDown, flytextSize);
+            }
+            else
+            {
+                Flytext.CreateFlytext(transform.position + Vector3.up * 0.2f, change.ToString("#"), flytextUp, flytextSize);
+            }
+        }
+        currentValue += change;
+        currentValue = Mathf.Clamp(currentValue, 0, fullValue);
+        Percent += change / fullValue;
     }
 }

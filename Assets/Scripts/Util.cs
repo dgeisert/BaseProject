@@ -31,7 +31,7 @@ public class Util : MonoBehaviour
         Vector3 shake = Vector3.zero;
         while (time < duration)
         {
-            time += 0.015f;
+            time += Time.deltaTime;
             shake = magnitude * 0.1f * new Vector3((Random.value - 0.5f), (Random.value - 0.5f), (Random.value - 0.5f));
             t.position += shake;
             yield return null;

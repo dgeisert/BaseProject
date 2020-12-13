@@ -47,7 +47,7 @@ public class Game : MonoBehaviour
             {
                 Camera.main.transform.Shake(0.5f, 3);
                 Flytext.CreateFlytext(Vector3.up, score.ToString("#"), Color.white, 6, 1.5f, 1);
-                GameObject.FindObjectOfType<FillBar>().Percent += (Random.value - 0.6f);
+                GameObject.FindObjectOfType<FillBar>().UpdateValue(100 * (Random.value - 0.6f));
             }
             if (Controls.Next)
             {
@@ -64,9 +64,10 @@ public class Game : MonoBehaviour
     public void Pause()
     {
         pauseMenu.canvas.enabled = !pauseMenu.canvas.enabled;
+        pauseMenu.PauseGame(pauseMenu.canvas.enabled);
     }
 
-    void Victory()
+    public void Victory()
     {
         inGameUI.EndGame(true);
         scoreScreen.EndGame(true);
