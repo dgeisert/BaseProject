@@ -8,6 +8,12 @@ public class ScoreScreen : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject victoryDisplay;
     public GameObject defeatDisplay;
+    public Canvas canvas;
+    
+    private void Awake()
+    {
+        canvas = GetComponent<Canvas>();
+    }
     public void EndGame(bool victory = false)
     {
         gameObject.SetActive(true);

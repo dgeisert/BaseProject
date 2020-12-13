@@ -53,7 +53,6 @@ public class SceneChanger : MonoBehaviour
     }
     IEnumerator DoLoadScene(Scenes scene)
     {
-        Debug.Log(scene);
         blackout.gameObject.SetActive(true);
         float startTime = Time.time;
         while (blackout.color.a < 1)

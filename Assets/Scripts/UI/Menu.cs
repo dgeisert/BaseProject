@@ -6,9 +6,7 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public GameObject settings;
-    public GameObject controls;
-    public GameObject menu;
+    public CanvasGroup settings, controls, menu;
     public UnityEngine.Audio.AudioMixer mixer;
     public Image NoMusic;
     public Image NoSound;
@@ -22,21 +20,21 @@ public class Menu : MonoBehaviour
     }
     public void OpenSettings()
     {
-        menu.SetActive(false);
-        controls.SetActive(false);
-        settings.SetActive(true);
+        menu.SetEnabled(false);
+        controls.SetEnabled(false);
+        settings.SetEnabled(true);
     }
     public void OpenControls()
     {
-        menu.SetActive(false);
-        controls.SetActive(true);
-        settings.SetActive(false);
+        menu.SetEnabled(false);
+        controls.SetEnabled(true);
+        settings.SetEnabled(false);
     }
     public void OpenMenu()
     {
-        menu.SetActive(true);
-        controls.SetActive(false);
-        settings.SetActive(false);
+        menu.SetEnabled(true);
+        controls.SetEnabled(false);
+        settings.SetEnabled(false);
     }
     public void MuteMusic()
     {

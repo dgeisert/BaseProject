@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public void OnEnable()
+    public Canvas canvas;
+    private void Awake()
     {
-        Time.timeScale = 0;
+        canvas = GetComponent<Canvas>();
     }
-    public void OnDisable()
+    public void PauseGame(bool doPause)
     {
-        Time.timeScale = 1;
+        Time.timeScale = doPause ? 0 : 1;
     }
     public void Resume()
     {

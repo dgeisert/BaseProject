@@ -5,9 +5,9 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public static Game Instance;
-    public PauseMenu pauseMenu;
-    public ScoreScreen scoreScreen;
-    public InGameUI inGameUI;
+    [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private ScoreScreen scoreScreen;
+    [SerializeField] private InGameUI inGameUI;
     public bool active = true;
     public static float Score
     {
@@ -28,15 +28,14 @@ public class Game : MonoBehaviour
             }
         }
     }
-    public float score;
-    int step = 3;
+    private float score;
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
-        pauseMenu.gameObject.SetActive(false);
         scoreScreen.gameObject.SetActive(false);
-        inGameUI.gameObject.SetActive(true);
+        pauseMenu.canvas.enabled = false;
+        inGameUI.canvas.enabled = true;
     }
 
     // Update is called once per frame
@@ -44,9 +43,15 @@ public class Game : MonoBehaviour
     {
         if (active)
         {
+            if (Controls.Shake)
+            {
+                Camera.main.transform.Shake(0.5f, 3);
+                Flytext.CreateFlytext(Vector3.up, score.ToString("#"), Color.white, 6, 1.5f, 1);
+                GameObject.FindObjectOfType<FillBar>().Percent += (Random.value - 0.6f);
+            }
             if (Controls.Next)
             {
-                Next();
+                Victory();
             }
             if (Controls.Pause)
             {
@@ -58,20 +63,13 @@ public class Game : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenu.gameObject.SetActive(!pauseMenu.gameObject.activeSelf);
+        pauseMenu.canvas.enabled = !pauseMenu.canvas.enabled;
     }
 
-    void Next()
+    void Victory()
     {
-        if (step > 0)
-        {
-            step--;
-            if (step == 0)
-            {
-                inGameUI.EndGame(true);
-                scoreScreen.EndGame(true);
-                pauseMenu.gameObject.SetActive(false);
-            }
-        }
+        inGameUI.EndGame(true);
+        scoreScreen.EndGame(true);
+        pauseMenu.canvas.enabled = false;
     }
 }

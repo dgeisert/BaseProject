@@ -6,6 +6,12 @@ using UnityEngine;
 public class InGameUI : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public Canvas canvas;
+
+    private void Awake()
+    {
+        canvas = GetComponent<Canvas>();
+    }
 
     public void UpdateScore(float val)
     {
