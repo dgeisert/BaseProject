@@ -7,6 +7,23 @@ public class FillBar : MonoBehaviour
     [SerializeField] Transform bg, fill, preFill;
     public float fullValue = 100, currentValue = 100;
     public bool flytext = false;
+    public bool LookAtCamera
+    {
+        get
+        {
+            return lookAtCamera;
+        }
+        set
+        {
+            lookAtCamera = value;
+            if (lookAtCamera)
+            {
+                lookTarget = Camera.main.transform;
+            }
+        }
+    }
+
+    [SerializeField] private bool lookAtCamera;
     public Color flytextUp, flytextDown;
     public float flytextSize;
     public float Percent
@@ -63,9 +80,19 @@ public class FillBar : MonoBehaviour
         }
     }
     private float percent = 1, changeTime, fillValue, preFillValue, rate = 0.01f, pause = 0.2f;
+    private Transform lookTarget;
+
+    private void Start()
+    {
+        LookAtCamera = lookAtCamera;
+    }
 
     private void Update()
     {
+        if (LookAtCamera)
+        {
+            transform.LookAt(transform.position - lookTarget.position);
+        }
         if (Time.time > changeTime + pause)
         {
             if (PreFillValue != Percent)
