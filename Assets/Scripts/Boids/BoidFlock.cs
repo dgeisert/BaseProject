@@ -10,6 +10,7 @@ public class BoidFlock : MonoBehaviour
     [SerializeField] private Vector3 randomSpawnRange;
     private List<Boid> boids;
     [SerializeField] private List<BoidAvoid> boidAvoids;
+    [SerializeField] private Transform centerMarker;
 
     private Vector3 center;
 
@@ -27,6 +28,10 @@ public class BoidFlock : MonoBehaviour
 
     public void Init()
     {
+        if(centerMarker == null)
+        {
+            centerMarker = transform;
+        }
         boids = new List<Boid>();
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -103,9 +108,9 @@ public class BoidFlock : MonoBehaviour
             }
 
             //global center bias
-            b.dx += -b.x * globalCenterBias;
-            b.dy += -b.y * globalCenterBias;
-            b.dz += -b.z * globalCenterBias;
+            b.dx += (centerMarker.position.x - b.x) * globalCenterBias;
+            b.dy += (centerMarker.position.y-b.y) * globalCenterBias;
+            b.dz += (centerMarker.position.z-b.z) * globalCenterBias;
 
             b.Move();
         }
